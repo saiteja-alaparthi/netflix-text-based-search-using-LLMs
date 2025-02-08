@@ -9,7 +9,7 @@ import { useState } from "react";
 
 export default function ListItem({ index }) {
   const [isHovered, setIsHovered] = useState(false);
-  const trailer = "https://archive.org/details/the-batman-tlr-2-3840x-1608-hevc-420-10bit-dts-hd-ma-ac-3-51";
+  const trailer = "https://archive.org/download/BigBuckBunny_328/BigBuckBunny_512kb.mp4";
   return (
     <div
       className="listItem"
