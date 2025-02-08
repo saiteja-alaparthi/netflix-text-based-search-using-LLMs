@@ -6,6 +6,6 @@ A full-stack Netflix Clone built using the MERN stack with AI-powered search fun
 
 
 Upcoming Features
-AI-driven personalized recommendations
-Collaborative filtering for better content suggestions
-Improved search ranking using NLP-based AI mode
+  AI-driven personalized recommendations
+  Collaborative filtering for better content suggestions
+  Improved search ranking using NLP-based AI mode
