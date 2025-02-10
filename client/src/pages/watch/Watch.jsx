@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './watch.scss';
-import { ArrowBackIosOutlined } from '@material-ui/icons';
+import { ArrowBackIosOutlined } from '@mui/icons-material';
 
 export default function Watch() {
   return (

@@ -4,7 +4,7 @@ import {
   Add,
   ThumbUpAltOutlined,
   ThumbDownOutlined,
-} from "@material-ui/icons";
+} from "@mui/icons-material";
 import { useState } from "react";
 
 export default function ListItem({ index }) {

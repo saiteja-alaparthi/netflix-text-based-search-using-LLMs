@@ -14,7 +14,7 @@ const Home = () => {
             <List/>
 
 
-        </div>
+        </div> 
     )
 }
 
