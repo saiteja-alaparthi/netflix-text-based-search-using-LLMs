@@ -5,14 +5,20 @@ import Register from "./pages/register/Register";
 import Watch from "./pages/watch/Watch";
 
 const App = () => {
+  const user = true;
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/movies" element={<Home/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/register" element={<Register/>} />
-        <Route path="/watch" element={<Watch/>} />
+        <Route path="/" element={user ? <Home /> : <Register />} />
+        {user && (
+          <>
+            <Route path="/movies" element={<Home type="movies" />} />
+            <Route path="/series" element={<Home type="series" />} />
+            <Route path="/watch" element={<Watch />} />
+          </>
+        )}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </Router>
   );

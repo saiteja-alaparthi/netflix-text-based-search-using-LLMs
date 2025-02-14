@@ -32,6 +32,18 @@
           cursor: pointer;
         }
       }
+      .link {
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+        margin-right: 20px;
+      
+        span {
+          &:hover {
+            color: #b3b3b3;
+          }
+        }
+      }
   
       .right {
         display: flex;

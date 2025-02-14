@@ -22,6 +22,10 @@ app.use('/api/users',userRoute)
 app.use('/api/movies',movieRoute)
 app.use('/api/lists',listRoute)
 
+// Add this test route
+app.get("/test", (req, res) => {
+  res.json("server is working");
+});
 
 app.listen(8800, ()=> {
     console.log("Backend server is running")
