@@ -7,10 +7,28 @@ import {
 } from "@mui/icons-material";
 import { useState } from "react";
 
-export default function ListItem({ index }) {
+export default function ListItem({ index, item }) {
   const [isHovered, setIsHovered] = useState(false);
-  const trailer = "https://archive.org/download/BigBuckBunny_328/BigBuckBunny_512kb.mp4";
+  const [movie, setMovie] = useState(null);
+
+  useEffect(() => {
+    const getMovie = async () => {
+      try {
+        const res = await axios.get(`/movies/find/${item._id}`, {
+          headers: {
+            token: `Bearer ${JSON.parse(localStorage.getItem("user")).accessToken}`,
+          },
+        });
+        setMovie(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMovie();
+  }, [item._id]);
+  
   return (
+    <Link to={{pathname: "/watch", movie: movie}}>
     <div
       className="listItem"
       style={{ left: isHovered && index * 225 - 50 + index * 2.5 }}
@@ -18,12 +36,12 @@ export default function ListItem({ index }) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <img
-        src="https://upload.wikimedia.org/wikipedia/en/1/1c/The_Dark_Knight_%282008_film%29.jpg"
+        src={item.img}
         alt=""
       />
       {isHovered && (
         <>
-          <video src={trailer} autoPlay loop muted/>
+          <video src={movie.trailer} autoPlay loop muted/>
           <div className="itemInfo">
             <div className="icons">
               <PlayArrow className="icon" />
@@ -32,17 +50,16 @@ export default function ListItem({ index }) {
               <ThumbDownOutlined className="icon" />
             </div>
             <div className="itemInfoTop">
-              <span>2 hour 32 mins</span>
-              <span className="limit">PG-13</span>
-              <span>2008</span>
+              <span>{movie.duration}</span>
+              <span className="limit">{movie.limit}</span>
+              <span>{movie.year}</span>
             </div>
-            <div className="desc">
-            Batman, Lieutenant Gordon and District Attorney Harvey Dent go up against the Joker, a criminal mastermind in ghoulish makeup terrorizing Gotham City.
-            </div>
-            <div className="genre">Action & Adventure</div>
+            <div className="desc">{movie.desc}</div>
+            <div className="genre">{movie.genre}</div>
           </div>
         </>
       )}
     </div>
+    </Link>
   );
 }

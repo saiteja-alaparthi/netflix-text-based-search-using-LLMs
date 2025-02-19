@@ -1,7 +1,26 @@
 import { InfoOutlined, PlayArrow } from "@mui/icons-material"
 import "./featured.scss"
+import { useState, useEffect } from "react";
 
 export default function Featured({type}) {
+    const [content, setContent] = useState({});
+
+    useEffect(() => {
+        const getRandomContent = async () => {
+            try {
+                const res = await axios.get(`/movies/random?type=${type}`, {
+                    headers: {
+                        token: `Bearer ${JSON.parse(localStorage.getItem("user")).accessToken}`,
+                }, 
+            });
+            setContent(res.data[0]);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        getRandomContent();
+    }, [type]);
+
     return (
         <div className="featured">
             {type && (
@@ -67,11 +86,11 @@ export default function Featured({type}) {
                 </select>
             </div>
             )}
-            <img src="https://wallpapercave.com/wp/wp4294839.jpg" alt=""/>
+            <img src={content.img} alt=""/>
 
             <div className="info">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/archive/3/34/20210711133524%21Batman_Begins_logo.png" alt="" />
-                <span className="desc">As a toxic threat endangers a corrupt city, Bruce Wayne finds himself at odds with a league of assassins and forced to battle more than his own demons. Directed by Christopher Nolan, this dark Batman origin story stars Christian Bale, Liam Neeson, Morgan Freeman and more.</span>
+                <img src={content.imgTitle} alt="" />
+                <span className="desc">{content.desc}</span>
                 <div className="buttons">
                     <button className="play">
                         <PlayArrow />
